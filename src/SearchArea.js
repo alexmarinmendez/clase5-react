@@ -1,23 +1,24 @@
 import React from "react";
+import Videos from "./Videos";
 
 class SearchArea extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             keyword: "",
+            videos: this.props.videos
         };
-        // this.submitHandler = this.submitHandler.bind(this);
+        this.submitHandler = this.submitHandler.bind(this);
     }
 
-    // submitHandler(e) {
-    //     e.preventDefault();
-    //     console.log("Searching", this.state.keyword);
-    // }
-
-    submitHandler = (e) => {
+    submitHandler(e) {
         e.preventDefault();
-        console.log("Searching", this.state.keyword);
-    };
+        console.log("Searching for ", this.state.keyword,"...");
+        let filterVideos = this.props.videos.filter(
+            video => video.title.toLowerCase().includes(this.state.keyword.toLowerCase())
+        );
+        this.setState({videos: filterVideos});
+    }
 
     render() {
         return (
@@ -36,6 +37,7 @@ class SearchArea extends React.Component {
                 </label>
                 <button>Submit</button>
             </form>
+            <Videos videos={this.state.videos} />           
             </div>
         );
     }
