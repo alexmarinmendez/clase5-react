@@ -1,5 +1,6 @@
 import './App.css';
 import Video from './Video';
+import SearchArea from './SearchArea';
 
 import data from './data';
 
@@ -9,6 +10,7 @@ const App = () => {
       <header>
         <strong><em>React-Tube-App</em></strong>
       </header>
+      <SearchArea />
       {
         data.map((video, index) => (
           <Video 
